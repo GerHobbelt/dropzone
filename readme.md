@@ -2,12 +2,26 @@
   <img alt="Dropzone.js" src="http://www.dropzonejs.com/images/logo.png" />
 </h1>
 
-*Version 3.6.1*
+*Version 3.10.2*
+
+![Build status](https://travis-ci.org/enyo/dropzone.png?branch=master)  
 
 Dropzone.js is a light weight JavaScript library that turns an HTML element into a dropzone.
 This means that a user can drag and drop a file onto it, and the file gets uploaded to the server via AJAX.
 
-> **Please read the [contributing guidelines](CONTRIBUTING.md) before you start working on Dropzone!**
+* * *
+
+> If you want support, please use [stackoverflow](http://stackoverflow.com/) with the `dropzone.js` tag and not the
+> GitHub issues tracker. Only post an issue here if you think you discovered a bug or have a feature request.
+
+* * *
+
+**Please read the [contributing guidelines](CONTRIBUTING.md) before you start working on Dropzone!**
+
+<div align="center">
+  <a href="https://github.com/enyo/dropzone/releases/latest"><img src="https://raw.github.com/enyo/dropzone/master/download.png" alt="Download" /></a>
+</div>
+
 
 Starting with version 2.0.0 this library does no longer depend on jQuery (but
 it still works as a jQuery module).
@@ -20,18 +34,16 @@ folder.
 ![Screenshot](http://i.imgur.com/zXyTjMp.png)
 
 
-Master  
-![Build status](https://travis-ci.org/enyo/dropzone.png?branch=master)  
-Development  
-![Build status](https://travis-ci.org/enyo/dropzone.png)
-
 
 ## Main features
 
 - Image thumbnail previews. Simply register the callback `thumbnail(file, data)` and display the image wherever you like
+- Retina enabled
 - Multiple files and synchronous uploads
 - Progress updates
 - Support for large files
+- Complete theming. The look and feel of Dropzone is just the default theme. You
+  can define everything yourself by overwriting the default event listeners.
 - Well tested
 
 ## Documentation
@@ -81,6 +93,12 @@ or at the [source](https://github.com/enyo/dropzone/blob/master/src/dropzone.cof
 I use [emitter](https://github.com/component/emitter) to manage events. If you want to register to some event you can do so on the `dropzone` object itself:
 
 ```js
+Dropzone.options.myDropzone({
+  init: function() {
+    this.on("error", function(file, message) { alert(message); });
+  }
+});
+// or if you need to access a Dropzone somewhere else:
 var myDropzone = Dropzone.forElement("div#my-dropzone");
 myDropzone.on("error", function(file, message) { alert(message); });
 ```
@@ -95,7 +113,7 @@ or at the [source](src/dropzone.coffee#L43).
 - Chrome 7+
 - Firefox 4+
 - IE 10+
-- Opera 12+ (Currently disabled for MacOS because their API is buggy)
+- Opera 12+ (Version 12 for MacOS is disabled because their API is buggy)
 - Safari 6+
 
 For all the other browsers, dropzone provides an oldschool file input fallback.
@@ -109,7 +127,7 @@ I realize that there [are](http://valums.com/ajax-upload/) [already](http://tuto
 - Big files should get uploaded without a problem.
 - I wanted a callback for image previews, that don't kill the browser if too many too big images are viewed.
 - I want to use the latest API of browsers. I don't care if it falls back to the normal upload form if the browser is too old.
-
+- I don't think that it's necessary anymore to depend on libraries such as jQuery (especially when providing functionality that isn't available in old browsers anyway).
 
 ## Other projects
 
