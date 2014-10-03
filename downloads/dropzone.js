@@ -55,7 +55,7 @@ require.define = function (name, exports) {
     exports: exports
   };
 };
-require.register("component~emitter@1.1.2", function (exports, module) {
+require.register("component~emitter@1.1.3", function (exports, module) {
 
 /**
  * Expose `Emitter`.
@@ -267,7 +267,7 @@ require.register("dropzone/lib/dropzone.js", function (exports, module) {
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
     __slice = [].slice;
 
-  Em = typeof Emitter !== "undefined" && Emitter !== null ? Emitter : require("component~emitter@1.1.2");
+  Em = typeof Emitter !== "undefined" && Emitter !== null ? Emitter : require("component~emitter@1.1.3");
 
   noop = function() {};
 
@@ -309,6 +309,7 @@ require.register("dropzone/lib/dropzone.js", function (exports, module) {
       autoQueue: true,
       addRemoveLinks: false,
       previewsContainer: null,
+      capture: null,
       dictDefaultMessage: "Drop files here to upload",
       dictFallbackMessage: "Your browser does not support drag'n'drop file uploads.",
       dictFallbackText: "Please use the fallback form below to upload your files like in the olden days.",
@@ -704,6 +705,9 @@ require.register("dropzone/lib/dropzone.js", function (exports, module) {
             _this.hiddenFileInput.className = "dz-hidden-input";
             if (_this.options.acceptedFiles != null) {
               _this.hiddenFileInput.setAttribute("accept", _this.options.acceptedFiles);
+            }
+            if (_this.options.capture != null) {
+              _this.hiddenFileInput.setAttribute("capture", _this.options.capture);
             }
             _this.hiddenFileInput.style.visibility = "hidden";
             _this.hiddenFileInput.style.position = "absolute";
@@ -1867,8 +1871,8 @@ require.register("dropzone/lib/dropzone.js", function (exports, module) {
 if (typeof exports == "object") {
   module.exports = require("dropzone");
 } else if (typeof define == "function" && define.amd) {
-  define([], function(){ return require("dropzone"); });
+  define("dropzone", [], function(){ return require("dropzone"); });
 } else {
-  this["Dropzone"] = require("dropzone");
+  (this || window)["Dropzone"] = require("dropzone");
 }
 })()
